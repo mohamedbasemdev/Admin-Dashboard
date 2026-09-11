@@ -1,7 +1,7 @@
 import EmailIcon from "@mui/icons-material/Email";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import TrafficIcon from "@mui/icons-material/traffic";
+import TrafficIcon from '@mui/icons-material/Traffic';
 import DowmloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";

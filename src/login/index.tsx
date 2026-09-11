@@ -88,7 +88,7 @@ const Login = () => {
         <MuiLink
           sx={{ color: colors.greenAccent[400] }}
           component={Link}
-          to="/signup"
+          to="/register"
         >
           Sign up
         </MuiLink>

@@ -18,7 +18,7 @@
     "@fullcalendar/list": "^6.1.21",
     "@fullcalendar/react": "^6.1.21",
     "@fullcalendar/timegrid": "^6.1.21",
-    "@mui/icons-material": "^9.2.0",
+    "@mui/icons-material": "^9.4.0",
     "@mui/material": "^9.2.0",
     "@mui/x-data-grid": "^9.10.1",
     "@supabase/supabase-js": "^2.112.2",
