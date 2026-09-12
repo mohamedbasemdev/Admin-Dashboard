@@ -3,7 +3,7 @@ import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import TrafficIcon from '@mui/icons-material/Traffic';
 import DowmloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import { Box, Button, Typography, useTheme } from "@mui/material";
+import { Box, Button, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import StatBox from "../component/StatBox";
 import { tokens } from "../theme";
@@ -147,13 +147,16 @@ const Dashboard = () => {
     };
   }, []);
 
+  const isMobile = useMediaQuery("(max-width:600px)")
+
   return (
     <Box sx={{ width: "98%", m: "auto" }}>
       <Box className="flex items-center justify-between">
         <Header title={"DASHBOARD"} subtitle={"Welcome to Your Dashboard"} />
-        <Button sx={{ background: colors.redAccent[600], color: "#fff" }}>
+        {isMobile ? <div></div> : <Button sx={{ background: colors.redAccent[600], color: "#fff" }}>
           <DowmloadOutlinedIcon /> DOWNLOAD REPORTS
-        </Button>
+        </Button>}
+        
       </Box>
       <Box className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         <Box>

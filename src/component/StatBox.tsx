@@ -18,12 +18,12 @@ const StatBox = ({ progress, icon, title, subtitle, increase }: StatBoxProps) =>
     <Box className="p-5 flex justify-between" sx={{background: colors.primary[400]}}>
       <Box>
         {icon}
-        <Typography sx={{mt:'5px'}} variant="h5">{title}</Typography>
-        <Typography sx={{color: colors.greenAccent[400], fontSize: `${isMobile ? '11px' : '14px'}`}} variant="h6">{subtitle}</Typography>
+        <Typography sx={{mt:'5px',fontSize: `${isMobile ? '11px' : '14px'}`}} variant="h5">{title}</Typography>
+        <Typography sx={{color: colors.greenAccent[400], fontSize: `${isMobile ? '9px' : '14px'}`, whiteSpace:'nowrap'}} variant="h6">{subtitle}</Typography>
       </Box>
       <Box>
-        <ProgressRecycle progress={progress} size={isMobile ? 20 : 40}/>
-        <Typography sx={{mt: '10px'}} variant="h5">{increase}</Typography>
+        <ProgressRecycle progress={progress} size={isMobile ? 18 : 40}/>
+        <Typography sx={{mt: '10px',fontSize: `${isMobile ? '11px' : '14px'}`}} variant="h5">{increase}</Typography>
       </Box>
     </Box>
   );

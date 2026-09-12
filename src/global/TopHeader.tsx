@@ -1,4 +1,4 @@
-import { TextField, Box, useTheme } from "@mui/material";
+import { TextField, Box, useTheme, useMediaQuery } from "@mui/material";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
@@ -66,95 +66,109 @@ const TopHeader = () => {
     }
   };
 
-  return (
-    <Box className="py-3 px-3 flex items-center justify-between">
-      <Box sx={{ position: "relative" }}>
-        <TextField
-          size="small"
-          className="w-50"
-          placeholder="Search pages..."
-          value={query}
-          onChange={(e) => {
-            setQuery(e.target.value);
-            setShowSuggestions(true);
-          }}
-          onFocus={() => setShowSuggestions(true)}
-          onBlur={() => {
-            setTimeout(() => setShowSuggestions(false), 150);
-          }}
-          onKeyDown={handleKeyDown}
-        />
-        <IconButton
-          onClick={handleSearchSubmit}
+  const isMobile = useMediaQuery("(max-width:600px)")
+return (
+  <Box
+    className={`py-3 px-3 flex ${
+      isMobile
+        ? "flex-col items-center gap-3"
+        : "items-center justify-between"
+    }`}
+  >
+    <Box sx={{ position: "relative" }}>
+      <TextField
+        size="small"
+        className="w-50"
+        placeholder="Search pages..."
+        value={query}
+        onChange={(e) => {
+          setQuery(e.target.value);
+          setShowSuggestions(true);
+        }}
+        onFocus={() => setShowSuggestions(true)}
+        onBlur={() => {
+          setTimeout(() => setShowSuggestions(false), 150);
+        }}
+        onKeyDown={handleKeyDown}
+      />
+
+      <IconButton
+        onClick={handleSearchSubmit}
+        sx={{
+          position: "absolute",
+          right: 0,
+          top: "50%",
+          transform: "translateY(-50%)",
+        }}
+      >
+        <SearchIcon />
+      </IconButton>
+
+      {showSuggestions && query.trim() !== "" && (
+        <Box
           sx={{
             position: "absolute",
-            right: "0",
-            top: "50%",
-            transform: "translateY(-50%)",
+            top: "100%",
+            left: 0,
+            right: 0,
+            zIndex: 10,
+            background: theme.palette.background.paper,
+            boxShadow: 3,
+            borderRadius: "4px",
+            mt: "4px",
+            maxHeight: "250px",
+            overflowY: "auto",
           }}
         >
-          <SearchIcon />
-        </IconButton>
-
-        {showSuggestions && query.trim() !== "" && (
-          <Box
-            sx={{
-              position: "absolute",
-              top: "100%",
-              left: 0,
-              right: 0,
-              zIndex: 10,
-              background: theme.palette.background.paper,
-              boxShadow: 3,
-              borderRadius: "4px",
-              mt: "4px",
-              maxHeight: "250px",
-              overflowY: "auto",
-            }}
-          >
-            {filteredPages.length > 0 ? (
-              filteredPages.map((page) => (
-                <Box
-                  key={page.path}
-                  onClick={() => goToPage(page.path)}
-                  sx={{
-                    px: 2,
-                    py: 1,
-                    cursor: "pointer",
-                    "&:hover": {
-                      background: theme.palette.action.hover,
-                    },
-                  }}
-                >
-                  {page.label}
-                </Box>
-              ))
-            ) : (
-              <Box sx={{ px: 2, py: 1, opacity: 0.6 }}> no results</Box>
-            )}
-          </Box>
-        )}
-      </Box>
-      <Box>
-        <IconButton onClick={() => colorMode.toggleColorMode()}>
-          {theme.palette.mode === "light" ? (
-            <LightModeOutlinedIcon />
+          {filteredPages.length > 0 ? (
+            filteredPages.map((page) => (
+              <Box
+                key={page.path}
+                onClick={() => goToPage(page.path)}
+                sx={{
+                  px: 2,
+                  py: 1,
+                  cursor: "pointer",
+                  "&:hover": {
+                    background: theme.palette.action.hover,
+                  },
+                }}
+              >
+                {page.label}
+              </Box>
+            ))
           ) : (
-            <DarkModeOutlinedIcon />
+            <Box sx={{ px: 2, py: 1, opacity: 0.6 }}>
+              No results
+            </Box>
           )}
-        </IconButton>
-        <IconButton>
-          <NotificationsOutlinedIcon />
-        </IconButton>
-        <IconButton>
-          <SettingsOutlinedIcon />
-        </IconButton>
-        <IconButton onClick={goToRegister}>
-          <PersonOutlinedIcon />
-        </IconButton>
-      </Box>
+        </Box>
+      )}
     </Box>
-  );
-};
+
+    <Box>
+      <IconButton onClick={colorMode.toggleColorMode}>
+        {theme.palette.mode === "light" ? (
+          <LightModeOutlinedIcon />
+        ) : (
+          <DarkModeOutlinedIcon />
+        )}
+      </IconButton>
+
+      <IconButton>
+        <NotificationsOutlinedIcon />
+      </IconButton>
+
+      <IconButton>
+        <SettingsOutlinedIcon />
+      </IconButton>
+
+      <IconButton onClick={goToRegister}>
+        <PersonOutlinedIcon />
+      </IconButton>
+    </Box>
+  </Box>
+);
+}
 
 export default TopHeader;

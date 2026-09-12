@@ -18,8 +18,6 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import logo from "../../src/assets/photo.jpg";
 
-// نفس المدة والـ easing اللي react-pro-sidebar بيستخدمها داخليًا لعرضها،
-// عشان الـ wrapper بتاعنا يتحرك بالظبط في نفس التوقيت (مش قبلها ولا بعدها)
 const SIDEBAR_TRANSITION = "width 0.3s ease";
 
 const SideBar = () => {
@@ -58,27 +56,28 @@ const SideBar = () => {
 
   const sidebarWidth = collapsed ? "70px" : isMobile ? "240px" : "270px";
 
+  const wrapperWidth = isMobile ? "70px" : sidebarWidth;
   return (
     <Box
+    sx={{
+      position: "relative",
+      width: wrapperWidth,   
+      flexShrink: 0,
+      height: "100vh",
+      transition: SIDEBAR_TRANSITION,
+    }}
+  >
+      <Box
       sx={{
-        position: "relative",
-        width: sidebarWidth,
-        flexShrink: 0,
+        position: isMobile && !collapsed ? "absolute" : "relative",
+        top: 0,
+        left: 0,
+        width: sidebarWidth,   
         height: "100vh",
-        transition: SIDEBAR_TRANSITION, // متزامن مع المكتبة
+        zIndex: 1200,
+        transition: SIDEBAR_TRANSITION,
       }}
     >
-      <Box
-        sx={{
-          position: isMobile && !collapsed ? "absolute" : "relative",
-          top: 0,
-          left: 0,
-          width: sidebarWidth,
-          height: "100vh",
-          zIndex: 1200,
-          transition: SIDEBAR_TRANSITION, // نفس المدة بالظبط
-        }}
-      >
         <Sidebar
           collapsed={collapsed}
           width={isMobile ? "240px" : "270px"}
